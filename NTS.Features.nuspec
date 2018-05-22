@@ -73,11 +73,11 @@
 	<files>
 		<file src="NetTopologySuite.Common.props" target="src" />
 	  <file src="SharedAssemblyVersion.cs" target="src" />
-		<file src="NetTopologySuite\**" exclude="NetTopologySuite\obj\**" target="src\NetTopologySuite" />
+		<file src="NetTopologySuite.Features\**" exclude="NetTopologySuite.Features\obj\**" target="src\NetTopologySuite.Features" />
 
-		<file src="Release\AnyCPU\**\NetTopologySuite.deps.json" target="lib" />
-		<file src="Release\AnyCPU\**\NetTopologySuite.dll" target="lib" />
-		<file src="Release\AnyCPU\**\NetTopologySuite.pdb" target="lib" />
-		<file src="Release\AnyCPU\**\NetTopologySuite.xml" target="lib" />
+		<file src="Release\AnyCPU\**\NetTopologySuite.Features.deps.json" target="lib" />
+		<file src="Release\AnyCPU\**\NetTopologySuite.Features.dll" target="lib" />
+		<file src="Release\AnyCPU\**\NetTopologySuite.Features.pdb" target="lib" />
+		<file src="Release\AnyCPU\**\NetTopologySuite.Features.xml" target="lib" />
 	</files>
 </package>
