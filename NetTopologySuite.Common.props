@@ -4,8 +4,8 @@
     <OutputPath>$(SolutionDir)$(Configuration)\$(Platform)</OutputPath>
     <DocumentationFile>$(OutputPath)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <GeoAPIPackageReferenceVersion>1.7.5-pre020</GeoAPIPackageReferenceVersion>
-    <NTSPackageReferenceVersion>1.15.0-pre063</NTSPackageReferenceVersion>
+    <GeoAPIPackageReferenceVersion>1.7.5-pre024</GeoAPIPackageReferenceVersion>
+    <NTSPackageReferenceVersion>1.15.0-pre075</NTSPackageReferenceVersion>
   </PropertyGroup>
 
   <!-- Client Profile frameworks don't have built-in shortcuts, so we need to specify these. -->

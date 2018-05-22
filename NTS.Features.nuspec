@@ -1,19 +1,21 @@
 <?xml version="1.0"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
-		<id>NetTopologySuite</id>
+		<id>NetTopologySuite.Features</id>
 		<version>$version$</version>
-		<title>NTS - Topology Suite</title>
+		<title>NTS - Topology Suite - Features</title>
 		<authors>NetTopologySuite - Team</authors>
 		<owners>NetTopologySuite - Team</owners>
 		<licenseUrl>http://www.gnu.org/licenses/lgpl.html</licenseUrl>
-		<projectUrl>https://github.com/NetTopologySuite/NetTopologySuite</projectUrl>
+		<projectUrl>https://github.com/NetTopologySuite/NetTopologySuite.Features</projectUrl>
 		<requireLicenseAcceptance>true</requireLicenseAcceptance>
 		<description>
-      The NTS Topology Suite is an API for modelling and manipulating 2-dimensional linear geometry. It provides numerous geometric predicates and functions. NTS conforms to the Simple Features Specification.
-      This package references GeoAPI.
+      A feature is a combination of spatial object and attribute data.
+      For this package attribute data is stored in AttributeTable objects.
+      These are combined with IGeometry objects to form a Feature.
+      A FeatureCollection is a collection of features.
 		</description>
-		<summary>NTS Topology Suite is a direct-port of all the functionalities offered by JTS Topology Suite</summary>
+		<summary>A features packages for the NTS Topology Suite</summary>
 		<tags>NTS Topology OGC SFS</tags>
 		<copyright>Copyright 2007-2015</copyright>
 		<language>en-US</language>
@@ -28,24 +30,24 @@
 		<dependencies>
 			<!-- traditional .NET framework targets -->
 			<group targetFramework=".NETFramework3.5-Client">
-				<dependency id="GeoAPI" version="[1.7.5-pre009, )" />
+				<dependency id="GeoAPI" version="[1.7.5-pre024, )" />
 			</group>
 
 			<group targetFramework=".NETFramework4.0-Client">
-				<dependency id="GeoAPI" version="[1.7.5-pre009, )" />
+				<dependency id="GeoAPI" version="[1.7.5-pre024, )" />
 			</group>
 
 			<group targetFramework=".NETFramework4.0.3-Client">
-				<dependency id="GeoAPI" version="[1.7.5-pre009, )" />
+				<dependency id="GeoAPI" version="[1.7.5-pre024, )" />
 			</group>
 
 			<group targetFramework=".NETFramework4.5">
-				<dependency id="GeoAPI" version="[1.7.5-pre009, )" />
+				<dependency id="GeoAPI" version="[1.7.5-pre024, )" />
 			</group>
 
 			<!-- .NET Standard targets -->
 			<group targetFramework=".NETStandard1.0">
-				<dependency id="GeoAPI" version="[1.7.5-pre009, )" />
+				<dependency id="GeoAPI" version="[1.7.5-pre024, )" />
 				<dependency id="System.Diagnostics.Debug" version="[4.3.0, )" />
 				<dependency id="System.Linq" version="[4.3.0, )" />
 				<dependency id="System.Text.RegularExpressions" version="[4.3.0, )" />
@@ -54,7 +56,7 @@
 			</group>
 
 			<group targetFramework=".NETStandard1.3">
-				<dependency id="GeoAPI" version="[1.7.5-pre009, )" />
+				<dependency id="GeoAPI" version="[1.7.5-pre024, )" />
 				<dependency id="System.Diagnostics.Debug" version="[4.3.0, )" />
 				<dependency id="System.IO.FileSystem" version="[4.3.0, )" />
 				<dependency id="System.Linq" version="[4.3.0, )" />
@@ -64,12 +66,13 @@
 			</group>
 
 			<group targetFramework=".NETStandard2.0">
-				<dependency id="GeoAPI" version="[1.7.5-pre009, )" />
+				<dependency id="GeoAPI" version="[1.7.5-pre024, )" />
 			</group>
 		</dependencies>
 	</metadata>
 	<files>
 		<file src="NetTopologySuite.Common.props" target="src" />
+	  <file src="SharedAssemblyVersion.cs" target="src" />
 		<file src="NetTopologySuite\**" exclude="NetTopologySuite\obj\**" target="src\NetTopologySuite" />
 
 		<file src="Release\AnyCPU\**\NetTopologySuite.deps.json" target="lib" />

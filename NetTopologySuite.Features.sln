@@ -10,9 +10,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 		.gitignore = .gitignore
 		NetTopologySuite.Common.props = NetTopologySuite.Common.props
+		NTS.Features.nuspec = NTS.Features.nuspec
+		SharedAssemblyVersion.cs = SharedAssemblyVersion.cs
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetTopologySuite.Features.Test", "NetTopologySuite.Features.Test\NetTopologySuite.Features.Test.csproj", "{AB86A1F4-C37C-46FF-BF5D-0A44B175FE07}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetTopologySuite.Features.Test", "NetTopologySuite.Features.Test\NetTopologySuite.Features.Test.csproj", "{AB86A1F4-C37C-46FF-BF5D-0A44B175FE07}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
