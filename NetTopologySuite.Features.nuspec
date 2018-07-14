@@ -30,24 +30,24 @@
 		<dependencies>
 			<!-- traditional .NET framework targets -->
 			<group targetFramework=".NETFramework3.5-Client">
-				<dependency id="GeoAPI" version="[%geoapiversion%, )" />
+				<dependency id="GeoAPI" version="[$GeoAPIVersion$, )" />
 			</group>
 
 			<group targetFramework=".NETFramework4.0-Client">
-				<dependency id="GeoAPI" version="[%geoapiversion%, )" />
+				<dependency id="GeoAPI" version="[$GeoAPIVersion$, )" />
 			</group>
 
 			<group targetFramework=".NETFramework4.0.3-Client">
-				<dependency id="GeoAPI" version="[%geoapiversion%, )" />
+				<dependency id="GeoAPI" version="[$GeoAPIVersion$, )" />
 			</group>
 
 			<group targetFramework=".NETFramework4.5">
-				<dependency id="GeoAPI" version="[%geoapiversion%, )" />
+				<dependency id="GeoAPI" version="[$GeoAPIVersion$, )" />
 			</group>
 
 			<!-- .NET Standard targets -->
 			<group targetFramework=".NETStandard1.0">
-				<dependency id="GeoAPI" version="[%geoapiversion%, )" />
+				<dependency id="GeoAPI" version="[$GeoAPIVersion$, )" />
 				<dependency id="System.Diagnostics.Debug" version="[4.3.0, )" />
 				<dependency id="System.Linq" version="[4.3.0, )" />
 				<dependency id="System.Text.RegularExpressions" version="[4.3.0, )" />
@@ -56,7 +56,7 @@
 			</group>
 
 			<group targetFramework=".NETStandard1.3">
-				<dependency id="GeoAPI" version="[%geoapiversion%, )" />
+				<dependency id="GeoAPI" version="[$GeoAPIVersion$, )" />
 				<dependency id="System.Diagnostics.Debug" version="[4.3.0, )" />
 				<dependency id="System.IO.FileSystem" version="[4.3.0, )" />
 				<dependency id="System.Linq" version="[4.3.0, )" />
@@ -66,7 +66,7 @@
 			</group>
 
 			<group targetFramework=".NETStandard2.0">
-				<dependency id="GeoAPI" version="[%geoapiversion%, )" />
+				<dependency id="GeoAPI" version="[$GeoAPIVersion$, )" />
 			</group>
 		</dependencies>
 	</metadata>
