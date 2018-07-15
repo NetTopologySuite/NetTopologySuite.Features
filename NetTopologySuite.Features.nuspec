@@ -6,7 +6,7 @@
 		<title>NTS - Topology Suite - Features</title>
 		<authors>NetTopologySuite - Team</authors>
 		<owners>NetTopologySuite - Team</owners>
-		<licenseUrl>http://www.gnu.org/licenses/lgpl.html</licenseUrl>
+		<licenseUrl>https://opensource.org/licenses/BSD-3-Clause</licenseUrl>
 		<projectUrl>https://github.com/NetTopologySuite/NetTopologySuite.Features</projectUrl>
 		<requireLicenseAcceptance>true</requireLicenseAcceptance>
 		<description>

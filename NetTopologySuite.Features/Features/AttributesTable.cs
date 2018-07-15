@@ -144,7 +144,7 @@ namespace NetTopologySuite.Features
         public void AddAttribute(string attributeName, object attributeValue)
         {
             Add(attributeName, attributeValue);
-        }        
+        }
 
         /// <summary>
         /// Delete the specified attribute from the table.
@@ -251,7 +251,7 @@ namespace NetTopologySuite.Features
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return ((IEnumerable) _attributes).GetEnumerator();
+            return ((IEnumerable)_attributes).GetEnumerator();
         }
     }
 }
