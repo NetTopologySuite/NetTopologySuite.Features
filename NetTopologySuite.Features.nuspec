@@ -6,8 +6,9 @@
 		<title>NTS - Topology Suite - Features</title>
 		<authors>NetTopologySuite - Team</authors>
 		<owners>NetTopologySuite - Team</owners>
-		<licenseUrl>https://opensource.org/licenses/BSD-3-Clause</licenseUrl>
+		<licenseUrl>https://raw.githubusercontent.com/NetTopologySuite/NetTopologySuite.Features/master/LICENSE</licenseUrl>
 		<projectUrl>https://github.com/NetTopologySuite/NetTopologySuite.Features</projectUrl>
+		<iconUrl>https://raw.githubusercontent.com/NetTopologySuite/GeoAPI/develop/icon.png</iconUrl>
 		<requireLicenseAcceptance>true</requireLicenseAcceptance>
 		<description>
       A feature is a combination of spatial object and attribute data.
@@ -20,12 +21,12 @@
 		<copyright>Copyright 2007-2015</copyright>
 		<language>en-US</language>
 		<frameworkAssemblies>
-			<frameworkAssembly assemblyName="System" targetFramework="net35-client,net40-client,net403-client,net45" />
-			<frameworkAssembly assemblyName="System.Xml" targetFramework="net35-client,net40-client,net403-client,net45" />
+			<frameworkAssembly assemblyName="System" />
+			<frameworkAssembly assemblyName="System.Xml" />
 
-			<frameworkAssembly assemblyName="System.Core" targetFramework="net35-client,net40-client,net403-client,net45" />
+			<frameworkAssembly assemblyName="System.Core" />
 
-			<frameworkAssembly assemblyName="System.Xml.Linq" targetFramework="net35-client,net40-client,net403-client,net45" />
+			<frameworkAssembly assemblyName="System.Xml.Linq" />
 		</frameworkAssemblies>
 		<dependencies>
 			<!-- traditional .NET framework targets -->
@@ -75,9 +76,9 @@
 	    <file src="SharedAssemblyVersion.cs" target="src" />
 		<file src="NetTopologySuite.Features\**" exclude="NetTopologySuite.Features\obj\**" target="src\NetTopologySuite.Features" />
 
-		<file src="Release\AnyCPU\**\NetTopologySuite.deps.json" target="lib" />
-		<file src="Release\AnyCPU\**\NetTopologySuite.dll" target="lib" />
-		<file src="Release\AnyCPU\**\NetTopologySuite.pdb" target="lib" />
-		<file src="Release\AnyCPU\**\NetTopologySuite.xml" target="lib" />
+		<file src="Release\AnyCPU\**\NetTopologySuite.Features.deps.json" target="lib" />
+		<file src="Release\AnyCPU\**\NetTopologySuite.Features.dll" target="lib" />
+		<file src="Release\AnyCPU\**\NetTopologySuite.Features.pdb" target="lib" />
+		<file src="Release\AnyCPU\**\NetTopologySuite.Features.xml" target="lib" />
 	</files>
 </package>
