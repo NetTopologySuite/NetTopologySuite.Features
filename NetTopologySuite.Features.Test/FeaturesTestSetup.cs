@@ -1,6 +1,6 @@
 ﻿using GeoAPI;
 
-namespace NetTopologySuite.Test
+namespace NetTopologySuite.Features.Test
 {
     /// <summary>
     /// Utility class to make sure that NTS is set up and registered properly

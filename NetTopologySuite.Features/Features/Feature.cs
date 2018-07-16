@@ -37,7 +37,7 @@ namespace NetTopologySuite.Features
         /// Creates an instance of this class
         /// </summary>
         public Feature() { }
-        
+
         /// <summary>
         /// Geometry representation of the feature.
         /// </summary>

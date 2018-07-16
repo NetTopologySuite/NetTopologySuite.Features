@@ -135,7 +135,7 @@ namespace NetTopologySuite.Features
             {
                 if (feature.BoundingBox != null)
                     res.ExpandToInclude(feature.BoundingBox);
-                else if (feature.Geometry !=  null)
+                else if (feature.Geometry != null)
                     res.ExpandToInclude(feature.Geometry.EnvelopeInternal);
             }
             return res;

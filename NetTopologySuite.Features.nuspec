@@ -6,7 +6,7 @@
 		<title>NTS - Topology Suite - Features</title>
 		<authors>NetTopologySuite - Team</authors>
 		<owners>NetTopologySuite - Team</owners>
-		<licenseUrl>http://www.gnu.org/licenses/lgpl.html</licenseUrl>
+		<licenseUrl>https://opensource.org/licenses/BSD-3-Clause</licenseUrl>
 		<projectUrl>https://github.com/NetTopologySuite/NetTopologySuite.Features</projectUrl>
 		<requireLicenseAcceptance>true</requireLicenseAcceptance>
 		<description>
@@ -30,24 +30,24 @@
 		<dependencies>
 			<!-- traditional .NET framework targets -->
 			<group targetFramework=".NETFramework3.5-Client">
-				<dependency id="GeoAPI" version="[1.7.5-pre024, )" />
+				<dependency id="GeoAPI" version="[$GeoAPIVersion$, )" />
 			</group>
 
 			<group targetFramework=".NETFramework4.0-Client">
-				<dependency id="GeoAPI" version="[1.7.5-pre024, )" />
+				<dependency id="GeoAPI" version="[$GeoAPIVersion$, )" />
 			</group>
 
 			<group targetFramework=".NETFramework4.0.3-Client">
-				<dependency id="GeoAPI" version="[1.7.5-pre024, )" />
+				<dependency id="GeoAPI" version="[$GeoAPIVersion$, )" />
 			</group>
 
 			<group targetFramework=".NETFramework4.5">
-				<dependency id="GeoAPI" version="[1.7.5-pre024, )" />
+				<dependency id="GeoAPI" version="[$GeoAPIVersion$, )" />
 			</group>
 
 			<!-- .NET Standard targets -->
 			<group targetFramework=".NETStandard1.0">
-				<dependency id="GeoAPI" version="[1.7.5-pre024, )" />
+				<dependency id="GeoAPI" version="[$GeoAPIVersion$, )" />
 				<dependency id="System.Diagnostics.Debug" version="[4.3.0, )" />
 				<dependency id="System.Linq" version="[4.3.0, )" />
 				<dependency id="System.Text.RegularExpressions" version="[4.3.0, )" />
@@ -56,7 +56,7 @@
 			</group>
 
 			<group targetFramework=".NETStandard1.3">
-				<dependency id="GeoAPI" version="[1.7.5-pre024, )" />
+				<dependency id="GeoAPI" version="[$GeoAPIVersion$, )" />
 				<dependency id="System.Diagnostics.Debug" version="[4.3.0, )" />
 				<dependency id="System.IO.FileSystem" version="[4.3.0, )" />
 				<dependency id="System.Linq" version="[4.3.0, )" />
@@ -66,18 +66,18 @@
 			</group>
 
 			<group targetFramework=".NETStandard2.0">
-				<dependency id="GeoAPI" version="[1.7.5-pre024, )" />
+				<dependency id="GeoAPI" version="[$GeoAPIVersion$, )" />
 			</group>
 		</dependencies>
 	</metadata>
 	<files>
 		<file src="NetTopologySuite.Common.props" target="src" />
-	  <file src="SharedAssemblyVersion.cs" target="src" />
+	    <file src="SharedAssemblyVersion.cs" target="src" />
 		<file src="NetTopologySuite.Features\**" exclude="NetTopologySuite.Features\obj\**" target="src\NetTopologySuite.Features" />
 
-		<file src="Release\AnyCPU\**\NetTopologySuite.Features.deps.json" target="lib" />
-		<file src="Release\AnyCPU\**\NetTopologySuite.Features.dll" target="lib" />
-		<file src="Release\AnyCPU\**\NetTopologySuite.Features.pdb" target="lib" />
-		<file src="Release\AnyCPU\**\NetTopologySuite.Features.xml" target="lib" />
+		<file src="Release\AnyCPU\**\NetTopologySuite.deps.json" target="lib" />
+		<file src="Release\AnyCPU\**\NetTopologySuite.dll" target="lib" />
+		<file src="Release\AnyCPU\**\NetTopologySuite.pdb" target="lib" />
+		<file src="Release\AnyCPU\**\NetTopologySuite.xml" target="lib" />
 	</files>
 </package>

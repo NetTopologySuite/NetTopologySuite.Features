@@ -2,11 +2,11 @@
 
   <PropertyGroup>
     <SolutionDir Condition=" '$(SolutionDir)' == '' ">$(ProjectDir)..\</SolutionDir>
-    <TargetFrameworks>net35;net40;net403;net45;netstandard1.6;netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>net40;net403;net45;netstandard1.6;netstandard2.0</TargetFrameworks>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>$(SolutionDir)nts.snk</AssemblyOriginatorKeyFile>
     <NoWarn>659,168,1587</NoWarn>
-    <RootNamespace>NetTopologySuite.Core.Test</RootNamespace>
+    <RootNamespace>NetTopologySuite.Features.Test</RootNamespace>
   </PropertyGroup>
 
   <Import Project="$(SolutionDir)NetTopologySuite.Common.props" />

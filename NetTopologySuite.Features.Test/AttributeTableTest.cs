@@ -1,7 +1,7 @@
 ﻿using System;
 using NUnit.Framework;
 
-namespace NetTopologySuite.Test
+namespace NetTopologySuite.Features.Test
 {
     /// <summary>
     /// A test fixture for the <see cref="Features.AttributesTable"/> class
