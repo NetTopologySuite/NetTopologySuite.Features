@@ -153,7 +153,7 @@ namespace NetTopologySuite.Features
         public virtual void DeleteAttribute(string attributeName)
         {
             if (!Exists(attributeName))
-                throw new ArgumentException("Attribute " + attributeName + " not exists!");
+                throw new ArgumentException("Attribute " + attributeName + " does not exist!");
             _attributes.Remove(attributeName);
         }
 
@@ -166,7 +166,7 @@ namespace NetTopologySuite.Features
         public Type GetType(string attributeName)
         {
             if (!Exists(attributeName))
-                throw new ArgumentOutOfRangeException("Attribute " + attributeName + " not exists!");
+                throw new ArgumentOutOfRangeException("Attribute " + attributeName + " does not exist!");
 
             // if we have null, we can't determine the objects type, thus return typeof(object)
             if (_attributes[attributeName] == null)
@@ -183,7 +183,7 @@ namespace NetTopologySuite.Features
         protected object GetValue(string attributeName)
         {
             if (!Exists(attributeName))
-                throw new ArgumentException("Attribute " + attributeName + " not exists!");
+                throw new ArgumentException("Attribute " + attributeName + " does not exist!");
             return _attributes[attributeName];
         }
 
@@ -197,7 +197,7 @@ namespace NetTopologySuite.Features
             if (!Exists(attributeName))
             {
                 if (!AddAttributeWithIndexer)
-                    throw new ArgumentException("Attribute " + attributeName + " not exists!");
+                    throw new ArgumentException("Attribute " + attributeName + " does not exist!");
                 Add(attributeName, attributeValue);
                 return;
             }
