@@ -6,7 +6,7 @@
 		<title>NTS - Topology Suite - Features</title>
 		<authors>NetTopologySuite - Team</authors>
 		<owners>NetTopologySuite - Team</owners>
-		<licenseUrl>https://raw.githubusercontent.com/NetTopologySuite/NetTopologySuite.Features/master/LICENSE</licenseUrl>
+		<license type="expression">BSD-3-Clause</license>
 		<projectUrl>https://github.com/NetTopologySuite/NetTopologySuite.Features</projectUrl>
 		<iconUrl>https://raw.githubusercontent.com/NetTopologySuite/GeoAPI/develop/icon.png</iconUrl>
 		<requireLicenseAcceptance>true</requireLicenseAcceptance>
