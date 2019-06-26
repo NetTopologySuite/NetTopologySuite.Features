@@ -11,10 +11,10 @@
 		<iconUrl>https://raw.githubusercontent.com/NetTopologySuite/GeoAPI/develop/icon.png</iconUrl>
 		<requireLicenseAcceptance>true</requireLicenseAcceptance>
 		<description>
-      A feature is a combination of spatial object and attribute data.
-      For this package attribute data is stored in AttributeTable objects.
-      These are combined with IGeometry objects to form a Feature.
-      A FeatureCollection is a collection of features.
+			A feature is a combination of spatial object and attribute data.
+			For this package attribute data is stored in AttributeTable objects.
+			These are combined with IGeometry objects to form a Feature.
+			A FeatureCollection is a collection of features.
 		</description>
 		<summary>A features packages for the NTS Topology Suite</summary>
 		<tags>NTS Topology OGC SFS</tags>
@@ -31,24 +31,24 @@
 		<dependencies>
 			<!-- traditional .NET framework targets -->
 			<group targetFramework=".NETFramework3.5-Client">
-				<dependency id="GeoAPI" version="[$GeoAPIVersion$, )" />
+				<dependency id="GeoAPI.Core" version="[$GeoAPIVersion$, 2.0.0-A)" />
 			</group>
 
 			<group targetFramework=".NETFramework4.0-Client">
-				<dependency id="GeoAPI" version="[$GeoAPIVersion$, )" />
+				<dependency id="GeoAPI.Core" version="[$GeoAPIVersion$, 2.0.0-A)" />
 			</group>
 
 			<group targetFramework=".NETFramework4.0.3-Client">
-				<dependency id="GeoAPI" version="[$GeoAPIVersion$, )" />
+				<dependency id="GeoAPI.Core" version="[$GeoAPIVersion$, 2.0.0-A)" />
 			</group>
 
 			<group targetFramework=".NETFramework4.5">
-				<dependency id="GeoAPI" version="[$GeoAPIVersion$, )" />
+				<dependency id="GeoAPI.Core" version="[$GeoAPIVersion$, 2.0.0-A)" />
 			</group>
 
 			<!-- .NET Standard targets -->
 			<group targetFramework=".NETStandard1.0">
-				<dependency id="GeoAPI" version="[$GeoAPIVersion$, )" />
+				<dependency id="GeoAPI.Core" version="[$GeoAPIVersion$, 2.0.0-A)" />
 				<dependency id="System.Diagnostics.Debug" version="[4.3.0, )" />
 				<dependency id="System.Linq" version="[4.3.0, )" />
 				<dependency id="System.Text.RegularExpressions" version="[4.3.0, )" />
@@ -57,7 +57,7 @@
 			</group>
 
 			<group targetFramework=".NETStandard1.3">
-				<dependency id="GeoAPI" version="[$GeoAPIVersion$, )" />
+				<dependency id="GeoAPI.Core" version="[$GeoAPIVersion$, 2.0.0-A)" />
 				<dependency id="System.Diagnostics.Debug" version="[4.3.0, )" />
 				<dependency id="System.IO.FileSystem" version="[4.3.0, )" />
 				<dependency id="System.Linq" version="[4.3.0, )" />
@@ -67,13 +67,13 @@
 			</group>
 
 			<group targetFramework=".NETStandard2.0">
-				<dependency id="GeoAPI" version="[$GeoAPIVersion$, )" />
+				<dependency id="GeoAPI.Core" version="[$GeoAPIVersion$, 2.0.0-A)" />
 			</group>
 		</dependencies>
 	</metadata>
 	<files>
 		<file src="NetTopologySuite.Common.props" target="src" />
-	    <file src="SharedAssemblyVersion.cs" target="src" />
+			<file src="SharedAssemblyVersion.cs" target="src" />
 		<file src="NetTopologySuite.Features\**" exclude="NetTopologySuite.Features\obj\**" target="src\NetTopologySuite.Features" />
 
 		<file src="Release\AnyCPU\**\NetTopologySuite.Features.deps.json" target="lib" />
