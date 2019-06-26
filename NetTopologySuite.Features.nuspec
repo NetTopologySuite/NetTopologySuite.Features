@@ -11,10 +11,10 @@
 		<iconUrl>https://raw.githubusercontent.com/NetTopologySuite/GeoAPI/develop/icon.png</iconUrl>
 		<requireLicenseAcceptance>true</requireLicenseAcceptance>
 		<description>
-			A feature is a combination of spatial object and attribute data.
-			For this package attribute data is stored in AttributeTable objects.
-			These are combined with IGeometry objects to form a Feature.
-			A FeatureCollection is a collection of features.
+        A feature is a combination of spatial object and attribute data.
+        For this package attribute data is stored in AttributeTable objects.
+        These are combined with IGeometry objects to form a Feature.
+        A FeatureCollection is a collection of features.
 		</description>
 		<summary>A features packages for the NTS Topology Suite</summary>
 		<tags>NTS Topology OGC SFS</tags>
