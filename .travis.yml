@@ -1,0 +1,35 @@
+language: csharp
+mono: none
+sudo: false
+dotnet: 2.2
+dist: xenial
+
+
+script:
+  - dotnet build -c Release
+  - dotnet test  -c Release --no-build
+  - dotnet pack  -c Release --no-build -p:NoWarn=NU5105
+
+
+deploy:
+
+
+  - on:
+      branch: master
+    provider: script
+    script:
+      - dotnet nuget push **/*.nupkg -s https://api.nuget.org/v3/index.json -k $NUGET_API_KEY
+    skip_cleanup: true
+
+
+  - on:
+      branch: develop
+    provider: script
+    script:
+      - dotnet nuget push **/*.nupkg -s https://www.myget.org/F/nettopologysuite/api/v2/package -k $MYGET_API_KEY
+    skip_cleanup: true
+
+env:
+  global:
+  - secure: LAI6KJjHA1usZL9Vm3BhLH2JpaukKFXe6OkWM9ahldsDbAqkScWfVIrBtQ0h0SteSpXTXTQDY35pFEuo3MUBmYcJo8NbgDd2f0u078lU6YFfQiHQnPqA8E1m6l+tCy8MTBHM2zePMYYOsyx4k0kOxZIjYK0RwhfmfDsG5QUjXYcABLK11z76vAl4ULIfYfvEnDF7hXbTOM+7XYS72Ve6q5LsNmS1kDGN1n6z8q6Phjac2254WTpUtSTv4u2wNnHYHIc7h7C3OBB6b7y5+pj6WEM2+r5ojs+Gq7QajK9VHNyYHRkUsCzbQKkSPrgskt10kKml3tcmdTCJshUq9nAE27qiCFc6OQO9iMtTh1m2ueZpeflyIhleGmMk12WHuqj1GmYH/8IQw75KzzezcyjuG19OJsL4QAT5FLMAdDfvckUgjY4+0bxPVI3hnWGnrvnrJA0aWXi9s7r+kT6SxI1MvZph7RqDlxC9/Mjt6lrzjMXvBJSf3vAyOGISF1bTOi+/bj586j7V0uagEYSy5tnj5+j/2wsbYcrb+5veVqYl0inPRYbrAAfaPnBux7ZJ/ZP7XggLnUVV0ZkSrqn1NLfEH6nZ30JCVbP9KX4Ztz00sIuHirqq5rhudHOSxL27+RNSX2RosnWDDMcNew6tRhOlSGZ1uZEekypnhvTK+0Ijzso=
+  - secure: gIlRSvxCO2AzEqiAzGVdowdkqyrlPw0BovjkyFC4HxRsvx7uc9RORv9lCRGR7ni7Z54QbG0DeLXK4PDxPAD6DlZpR8/2NsCLl1JSswRwQYddGsS1HBGTvUJE08RGlwdPYxhAUkz4jargs3EJnTq4TnqEkAzpYaLBSv4om2Q6VsoEe8Uat2iSoK0+NJD9EG++T0Szx2VsgF0M6ILIpYi0ICEqyK0Jb83ZW/78W5na4IN0ZnIOGoG0qeD5wMoOxq8OmnlSnKNJmsZI8LFEvMZu/QGb8YXz2aim+k0UE9kGa1sE/qweSyPtJuTIhUXqvefMZLfDzGIZVz1htvRRzcOQ1Cbh97T853UZiUHZgy+y5qFtuPxzXAt7eCvfTcjJjRDdXWRw7+NxyceEtQ1u4YSZ9yQLvwUyzhZukZXdclQ74k6GK2Wbohrt4lEADvnzm/PlCCYklv8b7TyKZdVRTILsFJ7eA3zZ8sXCbF8q2TG4BADJRkWxH+S/RdSeBkoiSlW43faFxUVHcC7yjBJshKbdBrQzncZG+7EFgUtw1hufXlwiSpWK0B01gYrsgYYPKYCbGidOJAMRjybyVYA8XfTPraeO7rw0b872jmGAv9TSVXvg+AwMGlnpOC+6n7Q+BL6qU/Q5Hnzi3YMg357qe2BgLJUGXwza/tEnJEeHbqXViZk=
