@@ -7,10 +7,10 @@ using NetTopologySuite.Geometries;
 namespace NetTopologySuite.Features
 {
     ///<summary>
-    /// Feature class
+    /// Standard implementation of <see cref="IFeature"/>.
     ///</summary>
     [Serializable]
-    public sealed class Feature : ISerializable
+    public sealed class Feature : IFeature, ISerializable
     {
         private Envelope _boundingBox;
 
@@ -67,7 +67,7 @@ namespace NetTopologySuite.Features
         /// Gets or sets the (optional) <see href="http://geojson.org/geojson-spec.html#geojson-objects"> Bounding box (<c>bbox</c>) Object</see>.
         /// </summary>
         /// <value>
-        /// A <see cref="Envelope"/> describing the bounding box or <value>null</value>.
+        /// A <see cref="Envelope"/> describing the bounding box or <see langword="null"/>.
         /// </value>
         public Envelope BoundingBox
         {
@@ -86,6 +86,9 @@ namespace NetTopologySuite.Features
 
             set => _boundingBox = value;
         }
+
+        /// <inheritdoc />
+        IReadOnlyDictionary<string, object> IFeature.Attributes => Attributes;
 
         void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
         {

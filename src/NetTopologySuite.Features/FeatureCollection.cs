@@ -11,7 +11,7 @@ namespace NetTopologySuite.Features
     /// Represents a feature collection.
     ///</summary>
     [Serializable]
-    public sealed class FeatureCollection : Collection<Feature>, ISerializable
+    public sealed class FeatureCollection : Collection<IFeature>, ISerializable
     {
         /// <summary>
         /// The bounding box of this <see cref="FeatureCollection"/>
@@ -22,12 +22,12 @@ namespace NetTopologySuite.Features
         /// Initializes a new instance of the <see cref="FeatureCollection"/> class.
         /// </summary>
         public FeatureCollection()
-            : base(new List<Feature>())
+            : base(new List<IFeature>())
         {
         }
 
         private FeatureCollection(SerializationInfo info, StreamingContext context)
-            : base((List<Feature>)info.GetValue("features", typeof(List<Feature>)))
+            : base((List<IFeature>)info.GetValue("features", typeof(List<IFeature>)))
         {
             _boundingBox = info.GetBoundingBox();
         }
@@ -36,7 +36,7 @@ namespace NetTopologySuite.Features
         /// Gets or sets the (optional) <see href="http://geojson.org/geojson-spec.html#geojson-objects"> Bounding box (<c>bbox</c>) Object</see>.
         /// </summary>
         /// <value>
-        /// A <see cref="Envelope"/> describing the bounding box or <value>null</value>.
+        /// A <see cref="Envelope"/> describing the bounding box or <see langword="null"/>.
         /// </value>
         public Envelope BoundingBox
         {
@@ -65,8 +65,13 @@ namespace NetTopologySuite.Features
             }
 
             var res = new Envelope();
-            foreach (var feature in (List<Feature>)Items)
+            foreach (var feature in (List<IFeature>)Items)
             {
+                if (feature is null)
+                {
+                    continue;
+                }
+
                 if (!(feature.BoundingBox is null))
                 {
                     res.ExpandToInclude(feature.BoundingBox);

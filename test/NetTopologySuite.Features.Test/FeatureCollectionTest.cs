@@ -24,7 +24,7 @@ namespace NetTopologySuite.Features.Test
         [Test]
         public void SimpleTest()
         {
-            Feature[] features = { CreateFeature(0), CreateFeature(1), CreateFeature(2), CreateFeature(3) };
+            IFeature[] features = { CreateFeature(0), CreateFeature(1), null, CreateFeature(2), CreateFeature(3) };
 
             var featureCollection = new FeatureCollection();
             foreach (var f in features)
@@ -38,20 +38,22 @@ namespace NetTopologySuite.Features.Test
         [Test]
         public void BoundingBoxTest()
         {
-                var featureCollection = new FeatureCollection();
-                for (int i = 0; i < 4; i++)
-                {
-                    featureCollection.Add(CreateFeature(i));
-                }
+            var featureCollection = new FeatureCollection();
+            for (int i = 0; i < 4; i++)
+            {
+                featureCollection.Add(null);
+                featureCollection.Add(CreateFeature(i));
+                featureCollection.Add(null);
+            }
 
-                Feature.ComputeBoundingBoxWhenItIsMissing = false;
-                Assert.That(featureCollection.BoundingBox, Is.Null);
+            Feature.ComputeBoundingBoxWhenItIsMissing = false;
+            Assert.That(featureCollection.BoundingBox, Is.Null);
 
-                Feature.ComputeBoundingBoxWhenItIsMissing = true;
-                Assert.That(featureCollection.BoundingBox, Is.EqualTo(new Envelope(0, 3, 0, 3)));
+            Feature.ComputeBoundingBoxWhenItIsMissing = true;
+            Assert.That(featureCollection.BoundingBox, Is.EqualTo(new Envelope(0, 3, 0, 3)));
 
-                Feature.ComputeBoundingBoxWhenItIsMissing = false;
-                Assert.That(featureCollection.BoundingBox, Is.EqualTo(new Envelope(0, 3, 0, 3)));
+            Feature.ComputeBoundingBoxWhenItIsMissing = false;
+            Assert.That(featureCollection.BoundingBox, Is.EqualTo(new Envelope(0, 3, 0, 3)));
         }
 
         [Test]
@@ -60,7 +62,9 @@ namespace NetTopologySuite.Features.Test
             var featureCollection = new FeatureCollection();
             for (int i = 0; i < 4; i++)
             {
+                featureCollection.Add(null);
                 featureCollection.Add(CreateFeature(i));
+                featureCollection.Add(null);
             }
 
             featureCollection.BoundingBox = new Envelope(2, 4, 8, 16);
@@ -78,17 +82,20 @@ namespace NetTopologySuite.Features.Test
             // ensure that nulls we wrote out stay null when reading them in.
             Feature.ComputeBoundingBoxWhenItIsMissing = false;
 
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < featureCollection.Count; i++)
             {
-                Assert.That(deserialized[i].Geometry, Is.EqualTo(featureCollection[i].Geometry));
-                Assert.That(deserialized[i].Attributes, Is.EqualTo(featureCollection[i].Attributes));
-                Assert.That(deserialized[i].BoundingBox, Is.EqualTo(featureCollection[i].BoundingBox));
+                var expected = featureCollection[i];
+                var actual = deserialized[i];
+
+                Assert.That(actual?.Geometry, Is.EqualTo(expected?.Geometry));
+                Assert.That(actual?.Attributes, Is.EqualTo(expected?.Attributes));
+                Assert.That(actual?.BoundingBox, Is.EqualTo(expected?.BoundingBox));
             }
 
             Assert.That(deserialized.BoundingBox, Is.EqualTo(new Envelope(2, 4, 8, 16)));
         }
 
-        private static Feature CreateFeature(int i)
+        private static IFeature CreateFeature(int i)
         {
             var geom = GeometryFactory.Default.CreatePoint(new Coordinate(i, i));
             var attributes = new[] { KeyValuePair.Create($"test.{i}", (object)i) };
