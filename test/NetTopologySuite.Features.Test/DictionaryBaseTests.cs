@@ -73,7 +73,7 @@ namespace NetTopologySuite.Features.Test
         [Test]
         public void TestReadOnly()
         {
-            var expected= new Dictionary<string, object>
+            var expected = new Dictionary<string, object>
             {
                 ["hello"] = new object(),
                 ["hi"] = Guid.NewGuid(),
