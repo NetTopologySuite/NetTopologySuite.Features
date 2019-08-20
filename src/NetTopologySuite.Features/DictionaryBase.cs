@@ -53,6 +53,7 @@ namespace NetTopologySuite.Features
         protected DictionaryBase(SerializationInfo info, StreamingContext context)
             : this(info.GetBoolean("IsReadOnly"))
         {
+            ValueComparer = (IEqualityComparer<TValue>)info.GetValue("ValueComparer", typeof(IEqualityComparer<TValue>));
         }
 
         /// <inheritdoc />
@@ -227,6 +228,7 @@ namespace NetTopologySuite.Features
             }
 
             info.AddValue("IsReadOnly", IsReadOnly);
+            info.AddValue("ValueComparer", ValueComparer ?? EqualityComparer<TValue>.Default);
         }
 
         void ICollection<KeyValuePair<TKey, TValue>>.Add(KeyValuePair<TKey, TValue> kvp) => Add(kvp.Key, kvp.Value);
