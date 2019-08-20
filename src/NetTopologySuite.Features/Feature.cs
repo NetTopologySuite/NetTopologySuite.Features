@@ -14,12 +14,14 @@ namespace NetTopologySuite.Features
     {
         private Envelope _boundingBox;
 
+        private IDictionary<string, object> _attributes;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Feature"/> class.
         /// </summary>
         public Feature()
         {
-            Attributes = new Dictionary<string, object>();
+            _attributes = new Dictionary<string, object>();
         }
 
         /// <summary>
@@ -30,7 +32,7 @@ namespace NetTopologySuite.Features
         public Feature(Geometry geometry, IEnumerable<KeyValuePair<string, object>> attributes)
         {
             Geometry = geometry;
-            Attributes = new Dictionary<string, object>();
+            _attributes = new Dictionary<string, object>();
             if (!(attributes is null))
             {
                 foreach (var kvp in attributes)
@@ -43,7 +45,7 @@ namespace NetTopologySuite.Features
         private Feature(SerializationInfo info, StreamingContext context)
         {
             _boundingBox = info.GetBoundingBox();
-            Attributes = (Dictionary<string, object>)info.GetValue("attributes", typeof(Dictionary<string, object>));
+            _attributes = (IDictionary<string, object>)info.GetValue("attributes", typeof(IDictionary<string, object>));
             Geometry = (Geometry)info.GetValue("geometry", typeof(Geometry));
         }
 
@@ -53,22 +55,17 @@ namespace NetTopologySuite.Features
         /// <remarks>Default is <value>false</value></remarks>
         public static bool ComputeBoundingBoxWhenItIsMissing { get; set; }
 
-        /// <summary>
-        /// Geometry representation of the feature.
-        /// </summary>
+        /// <inheritdoc />
         public Geometry Geometry { get; set; }
 
-        /// <summary>
-        /// Attributes table of the feature.
-        /// </summary>
-        public Dictionary<string, object> Attributes { get; }
+        /// <inheritdoc />
+        public IDictionary<string, object> Attributes
+        {
+            get => _attributes;
+            set => _attributes = value ?? throw new ArgumentNullException(nameof(value));
+        }
 
-        /// <summary>
-        /// Gets or sets the (optional) <see href="http://geojson.org/geojson-spec.html#geojson-objects"> Bounding box (<c>bbox</c>) Object</see>.
-        /// </summary>
-        /// <value>
-        /// A <see cref="Envelope"/> describing the bounding box or <see langword="null"/>.
-        /// </value>
+        /// <inheritdoc />
         public Envelope BoundingBox
         {
             get
@@ -86,9 +83,6 @@ namespace NetTopologySuite.Features
 
             set => _boundingBox = value;
         }
-
-        /// <inheritdoc />
-        IReadOnlyDictionary<string, object> IFeature.Attributes => Attributes;
 
         void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
         {

@@ -10,18 +10,18 @@ namespace NetTopologySuite.Features
     public interface IFeature
     {
         /// <summary>
-        /// Gets the <see cref="Geometries.Geometry"/> of this feature.
+        /// Gets or sets the <see cref="Geometries.Geometry"/> of this feature.
         /// </summary>
-        Geometry Geometry { get; }
+        Geometry Geometry { get; set; }
 
         /// <summary>
-        /// Gets an <see cref="Envelope"/> that describes the bounds of this feature.
+        /// Gets or sets an <see cref="Envelope"/> that describes the bounds of this feature.
         /// </summary>
-        Envelope BoundingBox { get; }
+        Envelope BoundingBox { get; set; }
 
         /// <summary>
-        /// Gets a representation of this feature's metadata, tagged by user-defined strings.
+        /// Gets or sets a representation of this feature's metadata, tagged by user-defined strings.
         /// </summary>
-        IReadOnlyDictionary<string, object> Attributes { get; }
+        IDictionary<string, object> Attributes { get; set; }
     }
 }
