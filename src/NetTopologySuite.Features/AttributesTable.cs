@@ -36,9 +36,9 @@ namespace NetTopologySuite.Features
         public AttributesTable(IEnumerable<KeyValuePair<string, object>> attributes)
             : this()
         {
-            foreach (var obj in attributes)
+            foreach (var kvp in attributes)
             {
-                Add(obj.Key, obj.Value);
+                Add(kvp.Key, kvp.Value);
             }
         }
 
