@@ -50,22 +50,27 @@ namespace NetTopologySuite.Features
         /// Function to retrieve the names (or keys) of the feature's attributes
         /// </summary>
         /// <returns>
-        /// Returns an array of <see cref="string"/> values</returns>
+        /// Returns an array of <see cref="string"/> values
+        /// </returns>
         string[] GetNames();
 
         /// <summary>
         /// Function to retrieve the attribute data of the feature
         /// </summary>
         /// <returns>
-        /// Returns an array of <see cref="object"/> values</returns>
+        /// Returns an array of <see cref="object"/> values
+        /// </returns>
         object[] GetValues();
 
         /// <summary>
-        /// Gets the value associated with the attribute for the specified name.
+        /// Gets the value associated with the attribute for the specified name, or
+        /// <see langword="null"/> if the attribute does not exist.
         /// </summary>
         /// <param name="attributeName">The name (or key) of the attribute.</param>
-        /// <param name="value">When this method returns, contains the value associated with the specified key, if the key is found; otherwise, <see langword="null"/>. This parameter is passed uninitialized.</param>
-        /// <returns><see langword="true"/> if this table contains an element with the specified key; otherwise, <see langword="false"/>.</returns>
-        bool TryGetValue(string attributeName, out object value);
+        /// <returns>
+        /// The value associated with <paramref name="attributeName"/>, or
+        /// <see langword="null"/> if the attribute does not exist.
+        /// </returns>
+        object GetOptionalValue(string attributeName);
     }
 }

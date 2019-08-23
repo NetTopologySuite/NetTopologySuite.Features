@@ -159,9 +159,10 @@ namespace NetTopologySuite.Features
         }
 
         /// <inheritdoc />
-        public bool TryGetValue(string attributeName, out object value)
+        public object GetOptionalValue(string attributeName)
         {
-            return _attributes.TryGetValue(attributeName, out value);
+            _attributes.TryGetValue(attributeName, out object value);
+            return value;
         }
 
         /// <inheritdoc cref="IEnumerable{T}.GetEnumerator" />
