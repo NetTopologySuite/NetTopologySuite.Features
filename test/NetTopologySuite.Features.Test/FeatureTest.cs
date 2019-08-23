@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-using NetTopologySuite.Geometries;
+﻿using NetTopologySuite.Geometries;
 
 using NUnit.Framework;
 
