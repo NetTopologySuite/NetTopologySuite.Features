@@ -13,14 +13,12 @@ namespace NetTopologySuite.Features
     {
         private Envelope _boundingBox;
 
-        private IAttributesTable _attributes;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Feature"/> class.
         /// </summary>
         public Feature()
         {
-            _attributes = new AttributesTable();
+            Attributes = new AttributesTable();
         }
 
         /// <summary>
@@ -31,7 +29,7 @@ namespace NetTopologySuite.Features
         public Feature(Geometry geometry, IAttributesTable attributes)
         {
             Geometry = geometry;
-            _attributes = attributes ?? throw new ArgumentNullException(nameof(attributes));
+            Attributes = attributes;
         }
 
         private Feature(SerializationInfo info, StreamingContext context)
@@ -51,11 +49,7 @@ namespace NetTopologySuite.Features
         public Geometry Geometry { get; set; }
 
         /// <inheritdoc />
-        public IAttributesTable Attributes
-        {
-            get => _attributes;
-            set => _attributes = value ?? throw new ArgumentNullException(nameof(value));
-        }
+        public IAttributesTable Attributes { get; set; }
 
         /// <inheritdoc />
         public Envelope BoundingBox
