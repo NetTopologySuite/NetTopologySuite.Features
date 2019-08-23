@@ -10,7 +10,7 @@ namespace NetTopologySuite.Features
     /// Stores all attributes associated with a single <c>Geometry</c> feature.
     /// </summary>
     [Serializable]
-    public class AttributesTable : IAttributesTable, IEnumerable<KeyValuePair<string, object>>, ISerializable
+    public sealed class AttributesTable : IAttributesTable, IEnumerable<KeyValuePair<string, object>>, ISerializable
     {
         private readonly Dictionary<string, object> _attributes;
 
@@ -61,6 +61,13 @@ namespace NetTopologySuite.Features
         public int Count => _attributes.Count;
 
         /// <inheritdoc />
+        public object this[string attributeName]
+        {
+            get => GetValue(attributeName);
+            set => SetValue(attributeName, value);
+        }
+
+        /// <inheritdoc />
         public string[] GetNames()
         {
             return _attributes.Keys.ToArray();
@@ -79,7 +86,7 @@ namespace NetTopologySuite.Features
         }
 
         /// <inheritdoc />
-        public virtual void DeleteAttribute(string attributeName)
+        public void DeleteAttribute(string attributeName)
         {
             if (!_attributes.Remove(attributeName))
             {
@@ -93,40 +100,6 @@ namespace NetTopologySuite.Features
             return _attributes.TryGetValue(attributeName, out object value)
                 ? value?.GetType() ?? typeof(object)
                 : throw new ArgumentOutOfRangeException($"Attribute {attributeName} does not exist!", nameof(attributeName));
-        }
-
-        /// <summary>
-        /// Get the value of the specified attribute.
-        /// </summary>
-        /// <param name="attributeName"></param>
-        /// <returns></returns>
-        protected object GetValue(string attributeName)
-        {
-            return _attributes.TryGetValue(attributeName, out object value)
-                ? value
-                : throw new ArgumentException($"Attribute {attributeName} does not exist!", nameof(attributeName));
-        }
-
-        /// <summary>
-        /// Set the value of the specified attribute.
-        /// </summary>
-        /// <param name="attributeName"></param>
-        /// <param name="attributeValue"></param>
-        protected void SetValue(string attributeName, object attributeValue)
-        {
-            if (!AddAttributeWithIndexer && !Exists(attributeName))
-            {
-                throw new ArgumentException($"Attribute {attributeName} does not exist!", nameof(attributeName));
-            }
-
-            _attributes[attributeName] = attributeValue;
-        }
-
-        /// <inheritdoc />
-        public object this[string attributeName]
-        {
-            get => GetValue(attributeName);
-            set => SetValue(attributeName, value);
         }
 
         /// <summary>
@@ -189,6 +162,23 @@ namespace NetTopologySuite.Features
             }
 
             info.AddValue("_attributes", _attributes);
+        }
+
+        private object GetValue(string attributeName)
+        {
+            return _attributes.TryGetValue(attributeName, out object value)
+                ? value
+                : throw new ArgumentException($"Attribute {attributeName} does not exist!", nameof(attributeName));
+        }
+
+        private void SetValue(string attributeName, object value)
+        {
+            if (!AddAttributeWithIndexer && !Exists(attributeName))
+            {
+                throw new ArgumentException($"Attribute {attributeName} does not exist!", nameof(attributeName));
+            }
+
+            _attributes[attributeName] = value;
         }
     }
 }
