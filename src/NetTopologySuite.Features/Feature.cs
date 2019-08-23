@@ -18,7 +18,6 @@ namespace NetTopologySuite.Features
         /// </summary>
         public Feature()
         {
-            Attributes = new AttributesTable();
         }
 
         /// <summary>
