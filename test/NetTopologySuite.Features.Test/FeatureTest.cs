@@ -23,7 +23,7 @@ namespace NetTopologySuite.Features.Test
         public void SimpleTest()
         {
             var geom = GeometryFactory.Default.CreatePoint(new Coordinate(1, 1));
-            var attributes = new[] { KeyValuePair.Create("test.1", new object()) };
+            var attributes = new AttributesTable { { "test.1", new object() } };
             var feature = new Feature(geom, attributes);
 
             Assert.That(feature.Geometry, Is.EqualTo(geom));

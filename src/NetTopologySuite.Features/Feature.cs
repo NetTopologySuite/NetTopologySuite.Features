@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 using NetTopologySuite.Geometries;
@@ -14,14 +13,14 @@ namespace NetTopologySuite.Features
     {
         private Envelope _boundingBox;
 
-        private IDictionary<string, object> _attributes;
+        private IAttributesTable _attributes;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Feature"/> class.
         /// </summary>
         public Feature()
         {
-            _attributes = new Dictionary<string, object>();
+            _attributes = new AttributesTable();
         }
 
         /// <summary>
@@ -29,23 +28,16 @@ namespace NetTopologySuite.Features
         /// </summary>
         /// <param name="geometry">The geometry</param>
         /// <param name="attributes">The attributes</param>
-        public Feature(Geometry geometry, IEnumerable<KeyValuePair<string, object>> attributes)
+        public Feature(Geometry geometry, IAttributesTable attributes)
         {
             Geometry = geometry;
-            _attributes = new Dictionary<string, object>();
-            if (!(attributes is null))
-            {
-                foreach (var kvp in attributes)
-                {
-                    Attributes.Add(kvp.Key, kvp.Value);
-                }
-            }
+            _attributes = attributes ?? throw new ArgumentNullException(nameof(attributes));
         }
 
         private Feature(SerializationInfo info, StreamingContext context)
         {
             _boundingBox = info.GetBoundingBox();
-            _attributes = (IDictionary<string, object>)info.GetValue("attributes", typeof(IDictionary<string, object>));
+            Attributes = (IAttributesTable)info.GetValue("attributes", typeof(IAttributesTable));
             Geometry = (Geometry)info.GetValue("geometry", typeof(Geometry));
         }
 
@@ -59,7 +51,7 @@ namespace NetTopologySuite.Features
         public Geometry Geometry { get; set; }
 
         /// <inheritdoc />
-        public IDictionary<string, object> Attributes
+        public IAttributesTable Attributes
         {
             get => _attributes;
             set => _attributes = value ?? throw new ArgumentNullException(nameof(value));

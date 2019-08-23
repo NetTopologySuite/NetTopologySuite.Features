@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-using NetTopologySuite.Geometries;
+﻿using NetTopologySuite.Geometries;
 
 namespace NetTopologySuite.Features
 {
@@ -22,6 +20,6 @@ namespace NetTopologySuite.Features
         /// <summary>
         /// Gets or sets a representation of this feature's metadata, tagged by user-defined strings.
         /// </summary>
-        IDictionary<string, object> Attributes { get; set; }
+        IAttributesTable Attributes { get; set; }
     }
 }

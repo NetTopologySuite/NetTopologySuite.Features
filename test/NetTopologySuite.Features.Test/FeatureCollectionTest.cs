@@ -98,7 +98,7 @@ namespace NetTopologySuite.Features.Test
         private static IFeature CreateFeature(int i)
         {
             var geom = GeometryFactory.Default.CreatePoint(new Coordinate(i, i));
-            var attributes = new[] { KeyValuePair.Create($"test.{i}", (object)i) };
+            var attributes = new AttributesTable { { $"test.{i}", i} };
             var bbox = i % 2 == 0 ? geom.EnvelopeInternal : null;
             return new Feature(geom, attributes) { BoundingBox = bbox };
         }
