@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <SignAssembly>true</SignAssembly>
+    <NoWarn>659,168,1587</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup Label="NuGet Package Info">
+    <PackageId>NetTopologySuite.Features</PackageId>
+    <Title>NTS - Topology Suite - Features</Title>
+    <Authors>NetTopologySuite - Team</Authors>
+    <Owners>NetTopologySuite - Team</Owners>
+    <PackageLicenseExpression>BSD-3-Clause</PackageLicenseExpression>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <Description>
+      A feature is a combination of spatial object and attribute data.
+      For this package attribute data is stored in AttributeTable objects.
+      These are combined with IGeometry objects to form a Feature.
+      A FeatureCollection is a collection of features.
+    </Description>
+    <PackageTags>NTS;Topology;OGC;SFS</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NetTopologySuite" Version="[2.0.0, 3.0.0-A)" />
+  </ItemGroup>
+
+</Project>

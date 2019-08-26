@@ -1,20 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27428.2037
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29009.5
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetTopologySuite.Features", "NetTopologySuite.Features\NetTopologySuite.Features.csproj", "{43865E17-0311-4F52-A8A9-00334DD8F76A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetTopologySuite.Features", "src\NetTopologySuite.Features\NetTopologySuite.Features.csproj", "{43865E17-0311-4F52-A8A9-00334DD8F76A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8896CE87-BB66-4E1B-BE38-2491C949D7E5}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 		.gitignore = .gitignore
-		NetTopologySuite.Common.props = NetTopologySuite.Common.props
-		NetTopologySuite.Features.nuspec = NetTopologySuite.Features.nuspec
-		SharedAssemblyVersion.cs = SharedAssemblyVersion.cs
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetTopologySuite.Features.Test", "NetTopologySuite.Features.Test\NetTopologySuite.Features.Test.csproj", "{AB86A1F4-C37C-46FF-BF5D-0A44B175FE07}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetTopologySuite.Features.Test", "test\NetTopologySuite.Features.Test\NetTopologySuite.Features.Test.csproj", "{AB86A1F4-C37C-46FF-BF5D-0A44B175FE07}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

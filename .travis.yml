@@ -1,0 +1,35 @@
+language: csharp
+mono: none
+sudo: false
+dotnet: 2.2
+dist: xenial
+
+
+script:
+  - dotnet build -c Release
+  - dotnet test  -c Release --no-build
+  - dotnet pack  -c Release --no-build -p:NoWarn=NU5105
+
+
+deploy:
+
+
+  - on:
+      branch: master
+    provider: script
+    script:
+      - dotnet nuget push **/*.nupkg -s https://api.nuget.org/v3/index.json -k $NUGET_API_KEY
+    skip_cleanup: true
+
+
+  - on:
+      branch: develop
+    provider: script
+    script:
+      - dotnet nuget push **/*.nupkg -s https://www.myget.org/F/nettopologysuite/api/v2/package -k $MYGET_API_KEY
+    skip_cleanup: true
+
+env:
+  global:
+  - secure: wTmAdCS9uZJ6fMoX8zTD34cHpjtPyR+5PIFNEWboFPqak9z+5ZjiyAM6U3G8iQmu9qBq7pG8QA6t8MaU23XVYpGuGPByGNtm9bQBCnUcVlY+vXCB0xOrO06azA2hK3ZlQ2kzXFInI14KDc2SBC7R7B5cz5ysyTDLf6megQGU9ZtO6IqhI7OE8u67CgzuX/dzuBvXFER8ki/rfTR26m8CjyLKai5yMPApyl01EHIDBQmgf7fpw88+n1y3k8eWR6u+lGRVHcqGl+7/vdogZx6rsxG+UO6NX+9+IrLW6zSJWIJfLsEA98TNcWudeZ+IimPY9yV1+CU49v0Wv6Ow6TzpdHx4KQFr5SLIgCxbGVYC1N1JrHZ8Ln/YuqVwR3VmJ/Y+drigBYS9Gmbh3vhYyqrch183wVpCuJ58VajnmXnRDOo0o7hSFzO2JCEyL3oX8XG+03CRWTkjRu50p3wbllYQ1praTLengYPqWC7DDBHfcDyreLzKGxHEZBJbOuQio86Vx/55rTmILbnE3MV43gFQEU+7zArFifoGsEfyxU+Adhr6cnO4+IMWbdMXdAfNjmFX41kXX0UpNT2idcVH3WxEKrGuP1BPE0KGubL8QFsAxnY3JwDIEUDWvI0TDbVa9cgNLc3Z1Z3r8XwDArMyArjeXxmn/fJLJ7GUosDUUv0S8hI=
+  - secure: wDf+H4BS8n2mS876d3z+vv2s7wxSAr0UbO47qamCPVZQhAcgTXvfyjvClcwp7fYoC2zYJC4Qut/mdyDlPhnNWOAUPx+nVv/l5fPMaKEv+zAWO2PmWsMlKW0nSGQ8EMxinRxfmmmLPxlyh3pHVmcgjo1C+QMB1+rEyEhfIRoPm23Q7dC27VEXEwIeiFEvo3taTGSMs5h9siTwAOoPIfcHffCMSF9UaECsWiRj4CVz0uSon8veT9EIwNe9X1XprFf1zaBLG8FCz1BsksHH9JIqaimch6AN4lVd2Jyl7vs2+4WRzmFKwXqWIgnQDZPQVv6OujVwnBt6hQg5mc9Po/UbxnaGv79hGpnlhKa/TjnD7be2qpMhPHzXdS0aQIORjrD+PdIisxJFvya1scDGU/Pv3CET/ubtpiDsJTGHeIQmvbAILunWxji4HoukTWZGzTHGBENIVGi31O8vx8gROLPtS+3iKy4FCV6EW/mmP1k0e0kueFLHW/HmNOklUr+gWlimNZ1OhBFxrfXe0JlTD/cNijeJmJXlloSfDdoNmFDvzUst8v0qQ59nuQoR5llEggIBx8OpK7qXBMmhPWtgkiQ06H0BoKPewZxjHTVmdjyT4C2ZGPHJMAbeuZ0LebM4+beELrjFQ9f4V6J+D3P0dlTa8rmwgI3pFb0Ky6jwJEeOWy8=
