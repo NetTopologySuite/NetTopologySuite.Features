@@ -22,19 +22,40 @@ namespace NetTopologySuite.Features
         public static bool AddAttributeWithIndexer { get; set; }
 
         /// <summary>
-        /// Creates an instance of this class.
+        /// Creates an instance of this class using the default equality comparer for names.
         /// </summary>
         public AttributesTable()
+            : this(default(IEqualityComparer<string>))
         {
-            _attributes = new Dictionary<string, object>();
         }
 
         /// <summary>
-        /// Creates an instance of this class using the provided enumeration of key/value pairs
+        /// Creates an instance of this class using the given equality comparer for names.
+        /// </summary>
+        /// <param name="nameComparer">The <see cref="IEqualityComparer{T}"/> to use for comparing names, or <see langword="null"/> to use the default.</param>
+        public AttributesTable(IEqualityComparer<string> nameComparer)
+            : this(new Dictionary<string, object>(nameComparer))
+        {
+        }
+
+        /// <summary>
+        /// Creates an instance of this class using the provided enumeration of key/value pairs and
+        /// the default equality comparer for names.
         /// </summary>
         /// <param name="attributes">An enumeration of key/value pairs</param>
         public AttributesTable(IEnumerable<KeyValuePair<string, object>> attributes)
-            : this()
+            : this(attributes, null)
+        {
+        }
+
+        /// <summary>
+        /// Creates an instance of this class using the provided enumeration of key/value pairs and
+        /// the given equality comparer for names.
+        /// </summary>
+        /// <param name="attributes">An enumeration of key/value pairs</param>
+        /// <param name="nameComparer">The <see cref="IEqualityComparer{T}"/> to use for comparing names, or <see langword="null"/> to use the default.</param>
+        public AttributesTable(IEnumerable<KeyValuePair<string, object>> attributes, IEqualityComparer<string> nameComparer)
+            : this(nameComparer)
         {
             foreach (var kvp in attributes)
             {
