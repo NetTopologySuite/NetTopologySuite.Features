@@ -76,6 +76,62 @@ namespace NetTopologySuite.Features.Test
         }
 
         [Test]
+        public void TestBasicReadAndWriteOperationsWithCustomComparer()
+        {
+            var expected = new Dictionary<string, object>();
+            var actual = new AttributesTable(StringComparer.OrdinalIgnoreCase);
+
+            // test everything after a serialize + deserialize round-trip
+            ExpectedAndActual.RoundTrip(ref expected, ref actual);
+
+            expected.Add("hello", "hi");
+            actual.Add("HELLO", "hi");
+
+            AssertEqual(expected, actual, ignoreCase: true);
+
+            AttributesTable.AddAttributeWithIndexer = false;
+            Assert.That(() => actual["Oh"] = 321, Throws.ArgumentException);
+
+            AssertEqual(expected, actual, ignoreCase: true);
+
+            AttributesTable.AddAttributeWithIndexer = true;
+            expected["oh"] = 321;
+            Assert.That(() => actual["oH"] = 321, Throws.Nothing);
+
+            AssertEqual(expected, actual, ignoreCase: true);
+
+            AssertEqual(expected, actual, ignoreCase: true);
+
+            expected.Remove("hello");
+            actual.DeleteAttribute("hELlo");
+
+            AssertEqual(expected, actual, ignoreCase: true);
+
+            Assert.That(() => actual.DeleteAttribute("heLLo"), Throws.ArgumentException);
+
+            AssertEqual(expected, actual, ignoreCase: true);
+
+            expected.Add("hello", new object());
+            actual.Add("hEllO", expected["hello"]);
+
+            AssertEqual(expected, actual, ignoreCase: true);
+
+            expected["hello"] = Guid.NewGuid();
+            actual["HelLo"] = expected["hello"];
+
+            AssertEqual(expected, actual, ignoreCase: true);
+
+            Assert.That(() => actual.Add("hEllo", "oh, hi there"), Throws.ArgumentException);
+
+            AssertEqual(expected, actual, ignoreCase: true);
+
+            Assert.That(() => actual["a key that shouldn't exist"], Throws.ArgumentException);
+            Assert.That(() => actual.GetType("a key that shouldn't exist"), Throws.InstanceOf<ArgumentOutOfRangeException>());
+
+            AssertEqual(expected, actual, ignoreCase: true);
+        }
+
+        [Test]
         public void TestMergeWith_PreferThis()
         {
             var table1 = new AttributesTable
@@ -135,16 +191,30 @@ namespace NetTopologySuite.Features.Test
             AssertEqual(expected, table1);
         }
 
-        private static void AssertEqual(Dictionary<string, object> expected, AttributesTable actual)
+        private static void AssertEqual(Dictionary<string, object> expected, AttributesTable actual, bool ignoreCase = false)
         {
             // test everything after a serialize + deserialize round-trip
             ExpectedAndActual.RoundTrip(ref expected, ref actual);
 
             Assert.That(actual.Count, Is.EqualTo(expected.Count));
-            Assert.That(actual, Is.EquivalentTo(expected));
+            if (ignoreCase)
+            {
+                Assert.That(actual, Is.EquivalentTo(expected).IgnoreCase);
+            }
+            else
+            {
+                Assert.That(actual, Is.EquivalentTo(expected));
+            }
 
             Assert.That(actual.GetNames().Count, Is.EqualTo(expected.Keys.Count));
-            Assert.That(actual.GetNames(), Is.EquivalentTo(expected.Keys));
+            if (ignoreCase)
+            {
+                Assert.That(actual.GetNames(), Is.EquivalentTo(expected.Keys).IgnoreCase);
+            }
+            else
+            {
+                Assert.That(actual.GetNames(), Is.EquivalentTo(expected.Keys));
+            }
 
             Assert.That(actual.GetValues().Count, Is.EqualTo(expected.Values.Count));
             Assert.That(actual.GetValues(), Is.EquivalentTo(expected.Values));
