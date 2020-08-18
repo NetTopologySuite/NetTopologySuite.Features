@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
 using NetTopologySuite.Geometries;
@@ -92,6 +93,42 @@ namespace NetTopologySuite.Features.Test
             }
 
             Assert.That(deserialized.BoundingBox, Is.EqualTo(new Envelope(2, 4, 8, 16)));
+        }
+
+        [Test]
+        public void CreateFeatureCollectionFromListofIFeature()
+        {
+            var features = new List<IFeature>()
+            {
+                CreateFeature(0),
+                CreateFeature(1),
+                CreateFeature(2)
+            };
+
+            var fc = new FeatureCollection(features);
+
+            Assert.That(fc.Count, Is.EqualTo(3));
+            Assert.That(fc[0].Attributes["test.0"], Is.EqualTo(0));
+            Assert.That(fc[1].Attributes["test.1"], Is.EqualTo(1));
+            Assert.That(fc[2].Attributes["test.2"], Is.EqualTo(2));
+        }
+
+        [Test]
+        public void CreateFeatureCollectionFromListofFeature()
+        {
+            var features = new List<Feature>()
+            {
+                (Feature) CreateFeature(0),
+                (Feature) CreateFeature(1),
+                (Feature) CreateFeature(2)
+            };
+
+            var fc = new FeatureCollection(features);
+
+            Assert.That(fc.Count, Is.EqualTo(3));
+            Assert.That(fc[0].Attributes["test.0"], Is.EqualTo(0));
+            Assert.That(fc[1].Attributes["test.1"], Is.EqualTo(1));
+            Assert.That(fc[2].Attributes["test.2"], Is.EqualTo(2));
         }
 
         private static IFeature CreateFeature(int i)

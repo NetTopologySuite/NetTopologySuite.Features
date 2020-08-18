@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Runtime.Serialization;
 
 using NetTopologySuite.Geometries;
@@ -23,6 +24,14 @@ namespace NetTopologySuite.Features
         /// </summary>
         public FeatureCollection()
             : base(new List<IFeature>())
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FeatureCollection"/> class, given a list of IFeature.
+        /// </summary>
+        public FeatureCollection(IEnumerable<IFeature> features)
+            : base(features.ToList())
         {
         }
 
