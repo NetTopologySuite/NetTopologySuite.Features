@@ -31,7 +31,7 @@ namespace NetTopologySuite.Features
         /// Initializes a new instance of the <see cref="FeatureCollection"/> class, given a list of IFeature.
         /// </summary>
         public FeatureCollection(IEnumerable<IFeature> features)
-            : base(features.ToList())
+            : base(features?.ToList() ?? throw new ArgumentNullException(nameof(features)))
         {
         }
 
