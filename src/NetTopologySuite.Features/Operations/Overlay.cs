@@ -3,6 +3,7 @@ using NetTopologySuite.Geometries.Prepared;
 using NetTopologySuite.Operation.Overlay;
 using System.Collections.Generic;
 using System.Linq;
+using NetTopologySuite.Operation.Union;
 
 namespace NetTopologySuite.Features.Operations
 {
@@ -12,21 +13,29 @@ namespace NetTopologySuite.Features.Operations
             features.Select(f => (Feature: f, PreparedGeometry: PreparedGeometryFactory.Prepare(f.Geometry)))
                     .SelectMany(tuple => otherFeatures.Select(other => new FeaturePair(tuple.PreparedGeometry, tuple.Feature, other)))
                     .Where(p => p.Intersects)
-                    .Select(p => p.Intersection);
+                    .Select(p => p.Intersection)
+                    .Where(f => !f.Geometry.IsEmpty);
 
-        public static IEnumerable<Feature> Difference(this IEnumerable<Feature> features, IEnumerable<Feature> otherFeatures) =>
-            features.Select(f => (Feature: f, PreparedGeometry: PreparedGeometryFactory.Prepare(f.Geometry)))
-                    .SelectMany(tuple => otherFeatures.Select(other => new FeaturePair(tuple.PreparedGeometry, tuple.Feature, other)))
-                    .Select(p => p.Intersects ? p.Difference : p.Feature1);
+        public static IEnumerable<Feature> Difference(this IEnumerable<Feature> features, IEnumerable<Feature> otherFeatures)
+        {
+            var fullGeometry = new UnaryUnionOp(otherFeatures.Select(f => f.Geometry)).Union();
+            
+            return features.Select(f => (Feature: f, PreparedGeometry: PreparedGeometryFactory.Prepare(f.Geometry)))
+                           .Select(tuple => tuple.PreparedGeometry.Intersects(fullGeometry)
+                                ? new Feature {  Geometry = tuple.Feature.Geometry.Difference(fullGeometry), Attributes = tuple.Feature.Attributes }
+                                : tuple.Feature)
+                           .Where(f => !f.Geometry.IsEmpty);
+        }
 
         public static IEnumerable<Feature> Union(this IEnumerable<Feature> features, IEnumerable<Feature> otherFeatures) =>
-            features.Select(f => (Feature: f, PreparedGeometry: PreparedGeometryFactory.Prepare(f.Geometry)))
-                    .SelectMany(tuple => otherFeatures.Select(other => new FeaturePair(tuple.PreparedGeometry, tuple.Feature, other)))
-                    .SelectMany(p => p.Intersects ? new[] { p.Union } : new[] { p.Feature1, p.Feature2 });
+            features.Intersection(otherFeatures)
+                    .Concat(features.SymDifference(otherFeatures))
+                    .Where(f => !f.Geometry.IsEmpty);
 
         public static IEnumerable<Feature> SymDifference(this IEnumerable<Feature> features, IEnumerable<Feature> otherFeatures) =>
-            features.Difference(otherFeatures)
-                    .Where(f => !otherFeatures.Difference(features).Contains(f));
+            features.Difference(otherFeatures).ToList()
+                    .Concat(otherFeatures.Difference(features).ToList())
+                    .Where(f => !f.Geometry.IsEmpty);
 
         public static IEnumerable<Feature> Overlay(this IEnumerable<Feature> features, IEnumerable<Feature> otherFeatures, SpatialFunction spatialFunction) =>
             spatialFunction == SpatialFunction.Intersection ? features.Intersection(otherFeatures)
@@ -87,7 +96,13 @@ namespace NetTopologySuite.Features.Operations
 
             IAttributesTable getMergedAttributes()
             {
-                var attrs = Feature1.Attributes ?? new AttributesTable();
+                var attrs = new AttributesTable();
+                if(Feature1.Attributes != null)
+                    Feature1.Attributes
+                            .GetNames()
+                            .ToList()
+                            .ForEach(n => attrs.Add(n, Feature1.Attributes[n]));
+
                 if (Feature2.Attributes != null)
                     Feature2.Attributes
                              .GetNames()
